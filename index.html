@@ -1,292 +1,263 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>The Torch — Online</title>
-  <link rel="icon" href="#torch" />
-  <meta name="description" content="The Torch — News, Editorial, Comic, Fashion, Entertainment & Sports" />
-  <style>
-    :root{
-      --violet-900: #3b0d3b;
-      --violet-700: #5b2c6f;
-      --violet-500: #7f4ea1;
-      --gold-600: #d4af37;
-      --gold-400: #ffd966;
-      --bg: #fff;
-      --muted: #6b6b6b;
-      --card-shadow: 0 6px 18px rgba(63,10,63,0.12);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    }
-    *{box-sizing:border-box}
-    body{margin:0;background:linear-gradient(180deg,#fff 0%, #fbf7ff 100%);color:#111}
-    a{color:var(--violet-700);text-decoration:none}
-
-    /* Top navigation */
-    header{
-      background:linear-gradient(90deg,var(--violet-700), var(--violet-500));
-      color: #fff;
-      padding:20px 16px;
-      position:sticky;top:0;z-index:40;
-      box-shadow: 0 6px 18px rgba(45,10,45,0.15);
-    }
-    .container{max-width:1100px;margin:0 auto}
-    nav{display:flex;align-items:center;gap:18px;justify-content:space-between}
-    .brand{display:flex;align-items:center;gap:12px}
-    .brand h1{font-size:20px;margin:0;letter-spacing:0.6px}
-    .nav-links{display:flex;gap:12px;align-items:center}
-    .nav-links a{padding:8px 12px;border-radius:8px;font-weight:600;background:transparent;color:rgba(255,255,255,0.95)}
-    .nav-links a:hover{background:rgba(0,0,0,0.08)}
-
-    /* Hero */
-    .hero{padding:48px 16px 28px}
-    .hero-inner{display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:center}
-    .hero h2{margin:0 0 10px;font-size:32px;color:#fff;line-height:1.05}
-    .hero p{margin:0;color:rgba(255,255,255,0.92)}
-    .logo-center{display:flex;align-items:center;justify-content:center}
-
-    /* Card grids */
-    main{padding:28px 16px}
-    .section{margin:28px 0}
-    .section h3{display:flex;align-items:center;gap:12px;margin:0 0 12px;font-size:20px}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
-    .card{background:#fff;border-radius:12px;padding:14px;box-shadow:var(--card-shadow);overflow:hidden}
-    .card h4{margin:6px 0;font-size:16px}
-    .card p{margin:0;color:var(--muted);font-size:14px}
-    .muted{color:var(--muted);font-size:13px}
-
-    /* Comic panel */
-    .comic-panel{background:linear-gradient(180deg,#fff9f0,#fff);padding:12px;border-radius:12px;min-height:220px;display:flex;align-items:center;justify-content:center}
-
-    footer{padding:28px 16px;background:linear-gradient(180deg,#fff,#fbf7ff)}
-    .footer-inner{display:flex;justify-content:space-between;gap:16px;align-items:center}
-
-    /* Torch mark */
-    .torch-wrap{width:72px;height:72px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:linear-gradient(180deg,var(--gold-600),var(--gold-400));box-shadow:0 8px 26px rgba(212,175,55,0.18)}
-    .torch-svg{width:46px;height:46px}
-
-    /* small screens */
-    @media (max-width:880px){
-      .hero-inner{grid-template-columns:1fr}
-      .nav-links{display:none}
-    }
-
-    /* little accent ribbon */
-    .ribbon{display:inline-block;background:var(--gold-600);color:#2b1b00;padding:6px 10px;border-radius:999px;font-weight:700;font-size:13px}
-
-    /* search */
-    .search{display:flex;gap:8px;align-items:center;background:rgba(255,255,255,0.08);padding:6px;border-radius:14px}
-    .search input{border:0;background:transparent;color:#fff;outline:none}
-
-    /* small utilities */
-    .byline{font-size:13px;color:var(--muted)}
-  </style>
-</head>
-<body>
-  <header>
-    <div class="container">
-      <nav>
-        <div class="brand">
-          <div class="torch-wrap" aria-hidden>
-            <!-- Simple torch SVG -->
-            <svg class="torch-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M32 6c-6.5 6.5-5.5 13-1.7 18C34 32 36 36 36 36s2-4 5.7-12C47.5 19 38.5 9.5 32 6z" fill="#fff" opacity="0.95"/>
-              <rect x="26" y="34" width="12" height="18" rx="4" fill="#fff"/>
-              <rect x="28" y="48" width="8" height="8" rx="3" fill="#2b0b2b"/>
-            </svg>
-          </div>
-          <div>
-            <h1>The Torch</h1>
-            <div class="muted">Independent student press</div>
-          </div>
-        </div>
-
-        <div class="nav-links" role="navigation" aria-label="main">
-          <a href="#landing">Home</a>
-          <a href="#news">News</a>
-          <a href="#editorial">Editorial</a>
-          <a href="#comic">Comic</a>
-          <a href="#fashion">Fashion</a>
-          <a href="#entertainment">Entertainment</a>
-          <a href="#sports">Sports</a>
-        </div>
-      </nav>
-    </div>
-  </header>
-
-  <section id="landing" class="hero">
-    <div class="container">
-      <div class="hero-inner">
-        <div>
-          <div class="ribbon">THE TORCH</div>
-          <h2>Lighting stories that matter — local reporting, sharp opinions, and a little fun.</h2>
-          <p style="margin-top:12px;max-width:70%">Welcome to The Torch: a compact, mobile-first news page built for quick reads and vibrant visuals. Browse our sections below — headlines are refreshed daily.</p>
-          <div style="margin-top:18px;display:flex;gap:10px">
-            <a class="btn" href="#news" style="background:var(--gold-600);padding:10px 14px;border-radius:10px;font-weight:700;color:#2b0b2b">Latest News</a>
-            <a class="btn" href="#editorial" style="background:transparent;border:2px solid rgba(255,255,255,0.12);padding:8px 12px;border-radius:10px;color:#fff">Opinion</a>
-          </div>
-        </div>
-
-        <div class="logo-center">
-          <!-- Decorative torch + tagline -->
-          <div style="text-align:center">
-            <div style="display:inline-block;background:linear-gradient(180deg,var(--violet-500),var(--violet-700));padding:20px;border-radius:16px;box-shadow:0 12px 30px rgba(91,44,111,0.18)">
-              <svg width="120" height="120" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
-                <circle cx="32" cy="32" r="30" fill="url(#g)" />
-                <defs>
-                  <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
-                    <stop offset="0" stop-color="#7f4ea1" />
-                    <stop offset="1" stop-color="#5b2c6f" />
-                  </linearGradient>
-                </defs>
-                <path d="M32 12c-5 5-4 10-1.4 13C33.8 30 35.5 34 35.5 34s1.5-4 4.7-11C44 17 38.5 13 32 12z" fill="#ffd966"/>
-                <rect x="26" y="32" width="12" height="18" rx="4" fill="#fff"/>
-              </svg>
-            </div>
-            <div style="color:#fff;margin-top:10px;font-weight:700">Violet & Gold</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <main class="container">
-    <!-- NEWS -->
-    <section id="news" class="section">
-      <h3><span class="ribbon" style="background:var(--violet-700);color:#fff">News</span> <small class="muted" style="margin-left:8px">Top Stories</small></h3>
-      <div class="grid">
-        <article class="card">
-          <h4>City council approves new student hub</h4>
-          <div class="byline muted">By Lara Cruz · Nov 10, 2025 · Local</div>
-          <p style="margin-top:8px">Council voted 7–2 to convert the old municipal library into a multi-purpose student hub offering co-working, counseling, and exhibition space. Expected opening: March 2026.</p>
-        </article>
-
-        <article class="card">
-          <h4>University research team publishes climate brief</h4>
-          <div class="byline muted">By News Desk · Nov 9, 2025 · Science</div>
-          <p style="margin-top:8px">A five-page brief argues local rainfall patterns may shift earlier in the year — implications for agriculture and events scheduling.</p>
-        </article>
-
-        <article class="card">
-          <h4>New mural program commissions 20 artists</h4>
-          <div class="byline muted">By Arts · Nov 8, 2025</div>
-          <p style="margin-top:8px">The program aims to brighten main streets and create opportunities for emerging creatives.</p>
-        </article>
-      </div>
-    </section>
-
-    <!-- EDITORIAL -->
-    <section id="editorial" class="section">
-      <h3><span class="ribbon">Editorial</span> <small class="muted" style="margin-left:8px">Opinion & Essays</small></h3>
-      <div class="grid">
-        <article class="card">
-          <h4>Why student voices must shape campus policy</h4>
-          <div class="byline muted">By Editor-in-Chief · Nov 7, 2025</div>
-          <p style="margin-top:8px">A persuasive piece arguing for stronger student representation on key committees — practical steps included.</p>
-        </article>
-        <article class="card">
-          <h4>On slow journalism: choosing care over speed</h4>
-          <div class="byline muted">By Op-Ed · Nov 2, 2025</div>
-          <p style="margin-top:8px">An essay that defends thorough reporting in an era of instant headlines.</p>
-        </article>
-      </div>
-    </section>
-
-    <!-- COMIC -->
-    <section id="comic" class="section">
-      <h3><span class="ribbon" style="background:#ff9f43;color:#2b0b2b">Comic</span> <small class="muted" style="margin-left:8px">Weekly strip</small></h3>
-      <div class="grid">
-        <div class="card comic-panel">
-          <!-- Simple 3-panel comic placeholder built with SVG -->
-          <svg width="100%" height="220" viewBox="0 0 900 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="comic strip">
-            <rect x="10" y="10" width="280" height="260" rx="10" fill="#fff" stroke="#f2f0f7"/>
-            <rect x="310" y="10" width="280" height="260" rx="10" fill="#fff" stroke="#f2f0f7"/>
-            <rect x="610" y="10" width="280" height="260" rx="10" fill="#fff" stroke="#f2f0f7"/>
-            <text x="50" y="60" font-size="22" fill="#5b2c6f">Panel 1 — "Morning rush"</text>
-            <text x="350" y="60" font-size="22" fill="#5b2c6f">Panel 2 — "Coffee mishap"</text>
-            <text x="650" y="60" font-size="22" fill="#5b2c6f">Panel 3 — "All good"</text>
-            <text x="50" y="120" font-size="16" fill="#6b6b6b">(simple line art — replace with your strip)</text>
-          </svg>
-        </div>
-      </div>
-    </section>
-
-    <!-- FASHION -->
-    <section id="fashion" class="section">
-      <h3><span class="ribbon">Fashion</span> <small class="muted" style="margin-left:8px">Trends & Street Style</small></h3>
-      <div class="grid">
-        <article class="card">
-          <h4>Violet accents: how to wear a bold shade this season</h4>
-          <div class="byline muted">By Style Desk · Oct 30, 2025</div>
-          <p style="margin-top:8px">Quick tips for integrating violet and gold accents into everyday outfits without overdoing it.</p>
-        </article>
-        <article class="card">
-          <h4>Local thrift finds: sustainable styling on a budget</h4>
-          <div class="byline muted">By Fashion · Oct 28, 2025</div>
-          <p style="margin-top:8px">A short guide to scoring quality second-hand pieces at the weekend markets.</p>
-        </article>
-      </div>
-    </section>
-
-    <!-- ENTERTAINMENT -->
-    <section id="entertainment" class="section">
-      <h3><span class="ribbon" style="background:#2d6a4f;color:#fff">Entertainment</span> <small class="muted" style="margin-left:8px">Reviews & Culture</small></h3>
-      <div class="grid">
-        <article class="card">
-          <h4>Campus theatre premiere wows audiences</h4>
-          <div class="byline muted">By Culture · Nov 1, 2025</div>
-          <p style="margin-top:8px">A review of the new play that blends local folklore and contemporary music.</p>
-        </article>
-        <article class="card">
-          <h4>Top 5 playlists for exam season</h4>
-          <div class="byline muted">By Music · Oct 25, 2025</div>
-          <p style="margin-top:8px">Curated mixes to help focus and unwind during study sessions.</p>
-        </article>
-      </div>
-    </section>
-
-    <!-- SPORTS -->
-    <section id="sports" class="section">
-      <h3><span class="ribbon" style="background:#1b4f72;color:#fff">Sports</span> <small class="muted" style="margin-left:8px">Recaps & Fixtures</small></h3>
-      <div class="grid">
-        <article class="card">
-          <h4>Blue Tigers upset the defending champs</h4>
-          <div class="byline muted">By Sports · Nov 11, 2025</div>
-          <p style="margin-top:8px">A dramatic finish at the outdoor stadium — full match report inside.</p>
-        </article>
-        <article class="card">
-          <h4>Training tips: stay injury-free this season</h4>
-          <div class="byline muted">By Health · Oct 20, 2025</div>
-          <p style="margin-top:8px">Coach-sourced drills to improve mobility and reduce common injuries.</p>
-        </article>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container footer-inner">
-      <div>
-        <strong>The Torch</strong>
-        <div class="muted">Independent student press — violet & gold</div>
-      </div>
-      <div style="text-align:right">
-        <div class="muted">Contact: editors@thetorch.example</div>
-        <div style="margin-top:6px;font-size:13px">Made for GitHub Pages · <a href="#landing">View sections</a></div>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    // Smooth scroll for nav anchors
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', (e) => {
-        const href = a.getAttribute('href');
-        if(href.length>1){
-          e.preventDefault();
-          document.querySelector(href).scrollIntoView({behavior:'smooth',block:'start'});
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Torch | Philippine News and Features</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        /* Custom scrollbar styling for flair */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb {
+            background: #2E0854; /* Deep Indigo for scrollbar */
+            border-radius: 4px;
         }
-      });
-    });
-  </script>
+        ::-webkit-scrollbar-thumb:hover { background: #4B0082; }
+
+        body { font-family: 'Inter', sans-serif; }
+        /* A light, cool-toned violet for the general background */
+        .page-bg { background-color: #F5F3FF; }
+    </style>
+    <script>
+        // Tailwind Configuration for Variety of Violets and Gold
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'deep-indigo': '#2E0854',   // Very dark, almost black-violet (Masthead/Primary Text)
+                        'royal-purple': '#4B0082',  // Primary Violet (Navigation/Accents)
+                        'amethyst': '#9966CC',      // Secondary Violet (Section headers/Borders)
+                        'lavender-mist': '#F5F3FF', // Background/Subtle highlights
+                        'accent-gold': '#FFD700',   // Bright Gold
+                        'dark-gold': '#B8860B',     // Dark Goldenrod for hover/text
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="page-bg">
+
+    <!-- Header / Masthead -->
+    <header class="bg-deep-indigo shadow-xl sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4 md:py-6 flex justify-between items-center">
+            <div class="text-4xl md:text-5xl font-extrabold tracking-tight">
+                <span class="text-white">The</span> <span class="text-accent-gold">Torch</span>
+            </div>
+            <div class="text-sm md:text-base text-lavender-mist hidden sm:block">
+                Wednesday, November 12, 2025 | The Voice of the Nation
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav class="bg-royal-purple shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-3">
+            <!-- Mobile Menu Button -->
+            <button id="menu-button" class="md:hidden text-accent-gold focus:outline-none p-2 rounded-lg hover:bg-royal-purple/80 transition duration-300">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+
+            <!-- Navigation Links - UPDATED: Used justify-between and removed md:space-x-8 -->
+            <div id="nav-links" class="hidden md:flex flex-col md:flex-row md:space-x-0 space-y-2 md:space-y-0 text-white font-semibold justify-between items-center">
+                <a href="#news" class="hover:text-accent-gold transition duration-200 py-1 md:py-0">NEWS</a>
+                <a href="#editorial" class="hover:text-accent-gold transition duration-200 py-1 md:py-0">EDITORIAL</a>
+                <a href="#sports" class="hover:text-accent-gold transition duration-200 py-1 md:py-0">SPORTS</a>
+                <a href="#entertainment" class="hover:text-accent-gold transition duration-200 py-1 md:py-0">ENTERTAINMENT</a>
+                <a href="#fashion" class="hover:text-accent-gold transition duration-200 py-1 md:py-0">FASHION</a>
+                <a href="#comics" class="hover:text-accent-gold transition duration-200 py-1 md:py-0">COMICS</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Grid -->
+    <main class="max-w-7xl mx-auto px-4 py-10">
+
+        <!-- LATEST NEWS BLOCK: Magazine-Style 3-Column Layout (2/3 Feature + 1/3 Headlines) -->
+        <section id="news" class="mb-12 bg-white p-6 rounded-2xl shadow-xl border-t-8 border-amethyst">
+            <h2 class="text-3xl font-black text-deep-indigo border-b-2 border-accent-gold pb-2 mb-6 uppercase tracking-wider">Top Stories: Philippines</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                
+                <!-- Main Feature Story (2/3 Width) -->
+                <div class="lg:col-span-2 overflow-hidden">
+                    <img class="w-full h-96 object-cover rounded-xl shadow-lg mb-4" 
+                         src="https://placehold.co/1000x600/4B0082/FFD700?text=NDRRMC+Typhoon+Uwan+Update" 
+                         alt="Rescue workers in a flooded area of the Philippines." 
+                         onerror="this.onerror=null;this.src='https://placehold.co/1000x600/4B0082/FFD700?text=Philippine+Typhoon+Crisis';"
+                    >
+                    <div class="p-2">
+                        <span class="text-sm font-bold text-amethyst uppercase tracking-widest mb-2 block">Breaking News</span>
+                        <h3 class="text-4xl font-bold text-gray-900 leading-snug mb-4">
+                            Uwan Death Toll Reaches 27 as NDRRMC Intensifies Relief Efforts; Calls for Corruption Probe Renewed
+                        </h3>
+                        <p class="text-gray-600 mb-4 text-lg">
+                            Following the devastating impact of Super Typhoon Uwan, which left 27 confirmed dead, emergency operations are in full swing across Central Luzon and Visayas. The national crisis has reignited public demands for a transparent probe into flood control infrastructure projects.
+                        </p>
+                        <a href="#" class="text-royal-purple font-extrabold hover:text-dark-gold transition duration-300">Continue Reading &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Headline Sidebar (1/3 Width) -->
+                <div class="lg:col-span-1 space-y-6 border-l-2 lg:border-l-4 border-lavender-mist pl-4">
+                    <h4 class="text-xl font-bold text-deep-indigo mb-4">In Focus</h4>
+                    
+                    <!-- Headline 1 -->
+                    <article class="pb-4 border-b border-lavender-mist">
+                        <h5 class="text-lg font-semibold text-gray-800 hover:text-royal-purple cursor-pointer transition duration-200 leading-tight">
+                            AFP Verifies List of Personalities Alleged to be Plotting Coup
+                        </h5>
+                        <p class="text-sm text-gray-500 mt-1">Politics & Governance | 3 hours ago</p>
+                    </article>
+
+                    <!-- Headline 2 -->
+                    <article class="pb-4 border-b border-lavender-mist">
+                        <h5 class="text-lg font-semibold text-gray-800 hover:text-royal-purple cursor-pointer transition duration-200 leading-tight">
+                            Philippines Chosen to Host 2026 UN World Forum on Gastronomy Tourism
+                        </h5>
+                        <p class="text-sm text-gray-500 mt-1">Global Stage | 1 day ago</p>
+                    </article>
+
+                    <!-- Headline 3 -->
+                    <article class="pb-4 border-b border-lavender-mist">
+                        <h5 class="text-lg font-semibold text-gray-800 hover:text-royal-purple cursor-pointer transition duration-200 leading-tight">
+                            Speaker Dy Vows to Back Anti-Dynasty Bill: 'A Step Towards Equity'
+                        </h5>
+                        <p class="text-sm text-gray-500 mt-1">Legislation | 1 day ago</p>
+                    </article>
+                    
+                    <!-- Headline 4 -->
+                    <article class="pb-4">
+                        <h5 class="text-lg font-semibold text-gray-800 hover:text-royal-purple cursor-pointer transition duration-200 leading-tight">
+                            Massive Landslide Area in Bohol Town to be Declared Danger Zone
+                        </h5>
+                        <p class="text-sm text-gray-500 mt-1">Regional News | 4 hours ago</p>
+                    </article>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- EDITORIAL & SPORTS SECTION: Unique Backgrounds for Contrast -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
+            
+            <!-- EDITORIAL SECTION -->
+            <section id="editorial" class="bg-white p-8 rounded-2xl shadow-xl transition duration-300 hover:scale-[1.01] border-l-8 border-accent-gold">
+                <h2 class="text-2xl font-black text-royal-purple border-b-2 border-amethyst pb-1 mb-4 uppercase">Editorial</h2>
+                <h3 class="text-2xl font-bold text-deep-indigo mb-3 leading-snug">The Unfinished Business of Climate Preparedness</h3>
+                <p class="text-gray-600">
+                    The back-to-back devastation wrought by Typhoons Tino and Uwan serves as a grim reminder that infrastructure and flood control must be treated as matters of life and death, not political projects. Our nation deserves accountability and resilient systems.
+                </p>
+                <a href="#" class="text-dark-gold font-bold text-sm mt-4 inline-block hover:text-royal-purple transition duration-300">Read the Full Piece &rarr;</a>
+            </section>
+
+            <!-- SPORTS SECTION -->
+            <section id="sports" class="bg-royal-purple text-white p-8 rounded-2xl shadow-xl transition duration-300 hover:scale-[1.01]">
+                <h2 class="text-2xl font-black text-accent-gold border-b-2 border-white/50 pb-1 mb-4 uppercase">Sports</h2>
+                <h3 class="text-2xl font-bold mb-3 leading-snug">Batista Fires 41 as Chery Tiggo Survives Capital1 Thriller in PVL</h3>
+                <p class="text-lavender-mist/90">
+                    Yunieska Batista delivered a conference-high 41 points to lift Chery Tiggo EV over Capital1 in a grueling five-set victory, securing a crucial win to stay alive in the Premier Volleyball League (PVL) quarterfinals race.
+                </p>
+                <a href="#" class="text-accent-gold font-bold text-sm mt-4 inline-block hover:text-dark-gold transition duration-300">View Scores and Analysis &rarr;</a>
+            </section>
+        </div>
+        
+        <!-- FEATURE BLOCKS: Entertainment & Fashion (3-Column layout on large screens) -->
+        <div class="mt-10">
+            <h2 class="text-3xl font-black text-deep-indigo border-b-4 border-amethyst pb-2 mb-6 uppercase tracking-wider">Features</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+                
+                <!-- ENTERTAINMENT SECTION -->
+                <section id="entertainment" class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-amethyst">
+                    <h3 class="text-xl font-bold text-royal-purple mb-3">Star Power at 'Meet & Bye' Premiere</h3>
+                    <img class="w-full h-40 object-cover rounded-lg shadow-inner mb-3" 
+                         src="https://placehold.co/400x200/9966CC/FFD700?text=Philippine+Movie+Stars" 
+                         alt="Red carpet event for a movie premiere."
+                    >
+                    <p class="text-gray-600 text-sm">
+                        Vice Ganda, Dingdong Dantes, and Marian Rivera graced the red carpet premiere of the holiday blockbuster, setting the stage for a strong opening weekend. Critics are already calling it a must-see.
+                    </p>
+                    <a href="#" class="text-dark-gold font-medium text-xs mt-3 inline-block hover:underline">See Red Carpet Photos &rarr;</a>
+                </section>
+
+                <!-- FASHION SECTION -->
+                <section id="fashion" class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-amethyst">
+                    <h3 class="text-xl font-bold text-royal-purple mb-3">Runway to Relief: Designers Adapt</h3>
+                    <img class="w-full h-40 object-cover rounded-lg shadow-inner mb-3" 
+                         src="https://placehold.co/400x200/4B0082/E6E6FA?text=Sustainable+Fashion" 
+                         alt="Model wearing sustainable Filipino design."
+                    >
+                    <p class="text-gray-600 text-sm">
+                        We spotlight five Filipino fashion houses who are pivoting their production to create sustainable and durable clothing items for disaster relief efforts, blending high fashion with genuine social consciousness.
+                    </p>
+                    <a href="#" class="text-dark-gold font-medium text-xs mt-3 inline-block hover:underline">Explore the Collection &rarr;</a>
+                </section>
+                
+                <!-- Placeholder Ad/Quick Link (for varied layout) -->
+                <div class="md:col-span-2 xl:col-span-1 p-6 bg-accent-gold/20 rounded-xl shadow-lg flex flex-col justify-center items-center text-center border-4 border-accent-gold border-dashed">
+                    <p class="text-xl font-bold text-deep-indigo">SUBSCRIBE TO THE TORCH WEEKLY DIGEST</p>
+                    <p class="text-sm text-gray-700 mt-2">Get the latest news directly in your inbox every morning.</p>
+                    <button class="mt-4 bg-deep-indigo text-accent-gold px-6 py-2 rounded-full font-bold shadow-md hover:bg-royal-purple transition duration-300">Sign Up Now</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- COMICS SECTION: Full Width -->
+        <section id="comics" class="mt-10 bg-deep-indigo p-8 rounded-2xl shadow-xl text-white">
+            <h2 class="text-3xl font-black text-accent-gold border-b-2 border-amethyst pb-2 mb-6 uppercase tracking-wider">COMICS: The Politikid</h2>
+            <div class="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-8">
+                <img class="w-full md:w-1/2 lg:w-2/3 h-auto rounded-lg shadow-inner border-4 border-accent-gold" 
+                     src="https://placehold.co/800x200/FFD700/4B0082?text=Daily+Strip:+The+Drainage+Dilemma" 
+                     alt="Daily Comic Strip Placeholder"
+                >
+                <div class="md:w-1/2 lg:w-1/3 text-center md:text-left">
+                    <h3 class="text-2xl font-bold mb-3">Nov. 12 - "The Drainage Dilemma"</h3>
+                    <p class="text-lavender-mist">
+                        Our favorite satirical cartoonist tackles the perennial problem of Manila's flood control projects in this witty, timely strip. Don't miss the punchline on the last panel!
+                    </p>
+                    <a href="#" class="text-accent-gold font-bold text-sm mt-3 inline-block hover:underline">View All Comics &rarr;</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-royal-purple mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-sm text-white/80">&copy; 2025 The Torch | All Rights Reserved. | Designed with <span class="text-accent-gold font-bold">Amethyst & Gold</span></p>
+            <p class="text-xs text-white/50 mt-2">A Publication Dedicated to Truth and Excellence.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Mobile Menu Toggle -->
+    <script>
+        const menuButton = document.getElementById('menu-button');
+        const navLinks = document.getElementById('nav-links');
+
+        menuButton.addEventListener('click', () => {
+            // Toggles the 'hidden' class on the navigation links
+            navLinks.classList.toggle('hidden');
+            navLinks.classList.toggle('flex');
+            navLinks.classList.toggle('flex-col');
+        });
+
+        // Add event listeners to close the menu when a link is clicked (mobile only)
+        document.querySelectorAll('#nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth < 768) { // md breakpoint in Tailwind is 768px
+                    navLinks.classList.add('hidden');
+                    navLinks.classList.remove('flex', 'flex-col');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
