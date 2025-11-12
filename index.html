@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>The Torch — Online</title>
+  <link rel="icon" href="#torch" />
+  <meta name="description" content="The Torch — News, Editorial, Comic, Fashion, Entertainment & Sports" />
+  <style>
+    :root{
+      --violet-900: #3b0d3b;
+      --violet-700: #5b2c6f;
+      --violet-500: #7f4ea1;
+      --gold-600: #d4af37;
+      --gold-400: #ffd966;
+      --bg: #fff;
+      --muted: #6b6b6b;
+      --card-shadow: 0 6px 18px rgba(63,10,63,0.12);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:linear-gradient(180deg,#fff 0%, #fbf7ff 100%);color:#111}
+    a{color:var(--violet-700);text-decoration:none}
+
+    /* Top navigation */
+    header{
+      background:linear-gradient(90deg,var(--violet-700), var(--violet-500));
+      color: #fff;
+      padding:20px 16px;
+      position:sticky;top:0;z-index:40;
+      box-shadow: 0 6px 18px rgba(45,10,45,0.15);
+    }
+    .container{max-width:1100px;margin:0 auto}
+    nav{display:flex;align-items:center;gap:18px;justify-content:space-between}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand h1{font-size:20px;margin:0;letter-spacing:0.6px}
+    .nav-links{display:flex;gap:12px;align-items:center}
+    .nav-links a{padding:8px 12px;border-radius:8px;font-weight:600;background:transparent;color:rgba(255,255,255,0.95)}
+    .nav-links a:hover{background:rgba(0,0,0,0.08)}
+
+    /* Hero */
+    .hero{padding:48px 16px 28px}
+    .hero-inner{display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:center}
+    .hero h2{margin:0 0 10px;font-size:32px;color:#fff;line-height:1.05}
+    .hero p{margin:0;color:rgba(255,255,255,0.92)}
+    .logo-center{display:flex;align-items:center;justify-content:center}
+
+    /* Card grids */
+    main{padding:28px 16px}
+    .section{margin:28px 0}
+    .section h3{display:flex;align-items:center;gap:12px;margin:0 0 12px;font-size:20px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+    .card{background:#fff;border-radius:12px;padding:14px;box-shadow:var(--card-shadow);overflow:hidden}
+    .card h4{margin:6px 0;font-size:16px}
+    .card p{margin:0;color:var(--muted);font-size:14px}
+    .muted{color:var(--muted);font-size:13px}
+
+    /* Comic panel */
+    .comic-panel{background:linear-gradient(180deg,#fff9f0,#fff);padding:12px;border-radius:12px;min-height:220px;display:flex;align-items:center;justify-content:center}
+
+    footer{padding:28px 16px;background:linear-gradient(180deg,#fff,#fbf7ff)}
+    .footer-inner{display:flex;justify-content:space-between;gap:16px;align-items:center}
+
+    /* Torch mark */
+    .torch-wrap{width:72px;height:72px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:linear-gradient(180deg,var(--gold-600),var(--gold-400));box-shadow:0 8px 26px rgba(212,175,55,0.18)}
+    .torch-svg{width:46px;height:46px}
+
+    /* small screens */
+    @media (max-width:880px){
+      .hero-inner{grid-template-columns:1fr}
+      .nav-links{display:none}
+    }
+
+    /* little accent ribbon */
+    .ribbon{display:inline-block;background:var(--gold-600);color:#2b1b00;padding:6px 10px;border-radius:999px;font-weight:700;font-size:13px}
+
+    /* search */
+    .search{display:flex;gap:8px;align-items:center;background:rgba(255,255,255,0.08);padding:6px;border-radius:14px}
+    .search input{border:0;background:transparent;color:#fff;outline:none}
+
+    /* small utilities */
+    .byline{font-size:13px;color:var(--muted)}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="brand">
+          <div class="torch-wrap" aria-hidden>
+            <!-- Simple torch SVG -->
+            <svg class="torch-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M32 6c-6.5 6.5-5.5 13-1.7 18C34 32 36 36 36 36s2-4 5.7-12C47.5 19 38.5 9.5 32 6z" fill="#fff" opacity="0.95"/>
+              <rect x="26" y="34" width="12" height="18" rx="4" fill="#fff"/>
+              <rect x="28" y="48" width="8" height="8" rx="3" fill="#2b0b2b"/>
+            </svg>
+          </div>
+          <div>
+            <h1>The Torch</h1>
+            <div class="muted">Independent student press</div>
+          </div>
+        </div>
+
+        <div class="nav-links" role="navigation" aria-label="main">
+          <a href="#landing">Home</a>
+          <a href="#news">News</a>
+          <a href="#editorial">Editorial</a>
+          <a href="#comic">Comic</a>
+          <a href="#fashion">Fashion</a>
+          <a href="#entertainment">Entertainment</a>
+          <a href="#sports">Sports</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <section id="landing" class="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div>
+          <div class="ribbon">THE TORCH</div>
+          <h2>Lighting stories that matter — local reporting, sharp opinions, and a little fun.</h2>
+          <p style="margin-top:12px;max-width:70%">Welcome to The Torch: a compact, mobile-first news page built for quick reads and vibrant visuals. Browse our sections below — headlines are refreshed daily.</p>
+          <div style="margin-top:18px;display:flex;gap:10px">
+            <a class="btn" href="#news" style="background:var(--gold-600);padding:10px 14px;border-radius:10px;font-weight:700;color:#2b0b2b">Latest News</a>
+            <a class="btn" href="#editorial" style="background:transparent;border:2px solid rgba(255,255,255,0.12);padding:8px 12px;border-radius:10px;color:#fff">Opinion</a>
+          </div>
+        </div>
+
+        <div class="logo-center">
+          <!-- Decorative torch + tagline -->
+          <div style="text-align:center">
+            <div style="display:inline-block;background:linear-gradient(180deg,var(--violet-500),var(--violet-700));padding:20px;border-radius:16px;box-shadow:0 12px 30px rgba(91,44,111,0.18)">
+              <svg width="120" height="120" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+                <circle cx="32" cy="32" r="30" fill="url(#g)" />
+                <defs>
+                  <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+                    <stop offset="0" stop-color="#7f4ea1" />
+                    <stop offset="1" stop-color="#5b2c6f" />
+                  </linearGradient>
+                </defs>
+                <path d="M32 12c-5 5-4 10-1.4 13C33.8 30 35.5 34 35.5 34s1.5-4 4.7-11C44 17 38.5 13 32 12z" fill="#ffd966"/>
+                <rect x="26" y="32" width="12" height="18" rx="4" fill="#fff"/>
+              </svg>
+            </div>
+            <div style="color:#fff;margin-top:10px;font-weight:700">Violet & Gold</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="container">
+    <!-- NEWS -->
+    <section id="news" class="section">
+      <h3><span class="ribbon" style="background:var(--violet-700);color:#fff">News</span> <small class="muted" style="margin-left:8px">Top Stories</small></h3>
+      <div class="grid">
+        <article class="card">
+          <h4>City council approves new student hub</h4>
+          <div class="byline muted">By Lara Cruz · Nov 10, 2025 · Local</div>
+          <p style="margin-top:8px">Council voted 7–2 to convert the old municipal library into a multi-purpose student hub offering co-working, counseling, and exhibition space. Expected opening: March 2026.</p>
+        </article>
+
+        <article class="card">
+          <h4>University research team publishes climate brief</h4>
+          <div class="byline muted">By News Desk · Nov 9, 2025 · Science</div>
+          <p style="margin-top:8px">A five-page brief argues local rainfall patterns may shift earlier in the year — implications for agriculture and events scheduling.</p>
+        </article>
+
+        <article class="card">
+          <h4>New mural program commissions 20 artists</h4>
+          <div class="byline muted">By Arts · Nov 8, 2025</div>
+          <p style="margin-top:8px">The program aims to brighten main streets and create opportunities for emerging creatives.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- EDITORIAL -->
+    <section id="editorial" class="section">
+      <h3><span class="ribbon">Editorial</span> <small class="muted" style="margin-left:8px">Opinion & Essays</small></h3>
+      <div class="grid">
+        <article class="card">
+          <h4>Why student voices must shape campus policy</h4>
+          <div class="byline muted">By Editor-in-Chief · Nov 7, 2025</div>
+          <p style="margin-top:8px">A persuasive piece arguing for stronger student representation on key committees — practical steps included.</p>
+        </article>
+        <article class="card">
+          <h4>On slow journalism: choosing care over speed</h4>
+          <div class="byline muted">By Op-Ed · Nov 2, 2025</div>
+          <p style="margin-top:8px">An essay that defends thorough reporting in an era of instant headlines.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- COMIC -->
+    <section id="comic" class="section">
+      <h3><span class="ribbon" style="background:#ff9f43;color:#2b0b2b">Comic</span> <small class="muted" style="margin-left:8px">Weekly strip</small></h3>
+      <div class="grid">
+        <div class="card comic-panel">
+          <!-- Simple 3-panel comic placeholder built with SVG -->
+          <svg width="100%" height="220" viewBox="0 0 900 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="comic strip">
+            <rect x="10" y="10" width="280" height="260" rx="10" fill="#fff" stroke="#f2f0f7"/>
+            <rect x="310" y="10" width="280" height="260" rx="10" fill="#fff" stroke="#f2f0f7"/>
+            <rect x="610" y="10" width="280" height="260" rx="10" fill="#fff" stroke="#f2f0f7"/>
+            <text x="50" y="60" font-size="22" fill="#5b2c6f">Panel 1 — "Morning rush"</text>
+            <text x="350" y="60" font-size="22" fill="#5b2c6f">Panel 2 — "Coffee mishap"</text>
+            <text x="650" y="60" font-size="22" fill="#5b2c6f">Panel 3 — "All good"</text>
+            <text x="50" y="120" font-size="16" fill="#6b6b6b">(simple line art — replace with your strip)</text>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- FASHION -->
+    <section id="fashion" class="section">
+      <h3><span class="ribbon">Fashion</span> <small class="muted" style="margin-left:8px">Trends & Street Style</small></h3>
+      <div class="grid">
+        <article class="card">
+          <h4>Violet accents: how to wear a bold shade this season</h4>
+          <div class="byline muted">By Style Desk · Oct 30, 2025</div>
+          <p style="margin-top:8px">Quick tips for integrating violet and gold accents into everyday outfits without overdoing it.</p>
+        </article>
+        <article class="card">
+          <h4>Local thrift finds: sustainable styling on a budget</h4>
+          <div class="byline muted">By Fashion · Oct 28, 2025</div>
+          <p style="margin-top:8px">A short guide to scoring quality second-hand pieces at the weekend markets.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ENTERTAINMENT -->
+    <section id="entertainment" class="section">
+      <h3><span class="ribbon" style="background:#2d6a4f;color:#fff">Entertainment</span> <small class="muted" style="margin-left:8px">Reviews & Culture</small></h3>
+      <div class="grid">
+        <article class="card">
+          <h4>Campus theatre premiere wows audiences</h4>
+          <div class="byline muted">By Culture · Nov 1, 2025</div>
+          <p style="margin-top:8px">A review of the new play that blends local folklore and contemporary music.</p>
+        </article>
+        <article class="card">
+          <h4>Top 5 playlists for exam season</h4>
+          <div class="byline muted">By Music · Oct 25, 2025</div>
+          <p style="margin-top:8px">Curated mixes to help focus and unwind during study sessions.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- SPORTS -->
+    <section id="sports" class="section">
+      <h3><span class="ribbon" style="background:#1b4f72;color:#fff">Sports</span> <small class="muted" style="margin-left:8px">Recaps & Fixtures</small></h3>
+      <div class="grid">
+        <article class="card">
+          <h4>Blue Tigers upset the defending champs</h4>
+          <div class="byline muted">By Sports · Nov 11, 2025</div>
+          <p style="margin-top:8px">A dramatic finish at the outdoor stadium — full match report inside.</p>
+        </article>
+        <article class="card">
+          <h4>Training tips: stay injury-free this season</h4>
+          <div class="byline muted">By Health · Oct 20, 2025</div>
+          <p style="margin-top:8px">Coach-sourced drills to improve mobility and reduce common injuries.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>
+        <strong>The Torch</strong>
+        <div class="muted">Independent student press — violet & gold</div>
+      </div>
+      <div style="text-align:right">
+        <div class="muted">Contact: editors@thetorch.example</div>
+        <div style="margin-top:6px;font-size:13px">Made for GitHub Pages · <a href="#landing">View sections</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth scroll for nav anchors
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', (e) => {
+        const href = a.getAttribute('href');
+        if(href.length>1){
+          e.preventDefault();
+          document.querySelector(href).scrollIntoView({behavior:'smooth',block:'start'});
+        }
+      });
+    });
+  </script>
+</body>
+</html>
