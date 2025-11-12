@@ -16,24 +16,36 @@
             background: #2E0854; /* Deep Indigo for scrollbar */
             border-radius: 4px;
         }
-        ::-webkit-scrollbar-thumb:hover { background: #4B0082; }
+        /* Dark mode scrollbar track */
+        .dark ::-webkit-scrollbar-track { background: #1f1f1f; }
+        /* Dark mode scrollbar thumb */
+        .dark ::-webkit-scrollbar-thumb { background: #9966CC; } 
+        .dark ::webkit-scrollbar-thumb:hover { background: #4B0082; }
 
         body { font-family: 'Inter', sans-serif; }
-        /* A light, cool-toned violet for the general background */
+        
+        /* Base background color - Light Mode */
         .page-bg { background-color: #F5F3FF; }
+        
+        /* Dark Mode: Apply deep dark background when 'dark' class is present on HTML */
+        .dark .page-bg { background-color: #121212; }
     </style>
     <script>
         // Tailwind Configuration for Variety of Violets and Gold
         tailwind.config = {
+            darkMode: 'class', // Enables dark mode based on the 'dark' class on the HTML tag
             theme: {
                 extend: {
                     colors: {
-                        'deep-indigo': '#2E0854',   // Very dark, almost black-violet (Masthead/Primary Text)
-                        'royal-purple': '#4B0082',  // Primary Violet (Navigation/Accents)
-                        'amethyst': '#9966CC',      // Secondary Violet (Section headers/Borders)
-                        'lavender-mist': '#F5F3FF', // Background/Subtle highlights
-                        'accent-gold': '#FFD700',   // Bright Gold
-                        'dark-gold': '#B8860B',     // Dark Goldenrod for hover/text
+                        'deep-indigo': '#2E0854',   // Primary Dark (Text, Header BG)
+                        'royal-purple': '#4B0082',  // Primary Accent (Nav BG, Links)
+                        'amethyst': '#9966CC',      // Secondary Accent (Borders, Highlights)
+                        'lavender-mist': '#F5F3FF', // Light BG/Text
+                        'accent-gold': '#FFD700',   // Bright Gold (Highlight)
+                        'dark-gold': '#B8860B',     // Dark Goldenrod (Hover/Text)
+                        'dark-bg-card': '#1F1F1F',  // Dark mode card background
+                        'dark-bg-base': '#121212',  // Dark mode main background
+                        'dark-text-base': '#D4D4D4', // Adjusted base text for dark mode
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -43,105 +55,140 @@
         }
     </script>
 </head>
-<body class="page-bg">
+<!-- Apply page-bg class to body, which will be overridden by .dark .page-bg in dark mode -->
+<body class="page-bg transition-colors duration-500">
 
     <!-- Header / Masthead -->
-    <header class="bg-deep-indigo shadow-xl sticky top-0 z-50">
+    <header class="bg-deep-indigo dark:bg-black shadow-xl sticky top-0 z-50 transition-colors duration-500">
         <div class="max-w-7xl mx-auto px-4 py-4 md:py-6 flex justify-between items-center">
             <div class="text-4xl md:text-5xl font-extrabold tracking-tight">
                 <span class="text-white">The</span> <span class="text-accent-gold">Torch</span>
             </div>
-            <div class="text-sm md:text-base text-lavender-mist hidden sm:block">
-                Wednesday, November 12, 2025 | The Voice of the Nation
+            <div class="flex items-center space-x-4">
+                <div class="text-sm md:text-base text-lavender-mist dark:text-dark-text-base hidden sm:block">
+                    Wednesday, November 12, 2025 | The Voice of the Nation
+                </div>
+                <!-- Dark Mode Toggle Button -->
+                <button id="dark-mode-toggle" class="p-2 rounded-full text-accent-gold hover:bg-royal-purple/50 dark:hover:bg-gray-700 transition duration-300 focus:outline-none">
+                    <svg id="sun-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    <svg id="moon-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                </button>
             </div>
         </div>
     </header>
 
-    <!-- Navigation Bar -->
-    <nav class="bg-royal-purple shadow-md">
+    <!-- Navigation Bar - Excellent Layout on all devices -->
+    <nav class="bg-royal-purple dark:bg-deep-indigo shadow-md transition-colors duration-500">
         <div class="max-w-7xl mx-auto px-4 py-3">
             <!-- Mobile Menu Button -->
-            <button id="menu-button" class="md:hidden text-accent-gold focus:outline-none p-2 rounded-lg hover:bg-royal-purple/80 transition duration-300">
+            <button id="menu-button" class="md:hidden text-accent-gold focus:outline-none p-2 rounded-lg hover:bg-royal-purple/80 dark:hover:bg-deep-indigo/80 transition duration-300">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
             </button>
 
-            <!-- Navigation Links - UPDATED: Used justify-between and removed md:space-x-8 -->
-            <div id="nav-links" class="hidden md:flex flex-col md:flex-row md:space-x-0 space-y-2 md:space-y-0 text-white font-semibold justify-between items-center">
-                <a href="#news" class="hover:text-accent-gold transition duration-200 py-1 md:py-0">NEWS</a>
-                <a href="#editorial" class="hover:text-accent-gold transition duration-200 py-1 md:py-0">EDITORIAL</a>
-                <a href="#sports" class="hover:text-accent-gold transition duration-200 py-1 md:py-0">SPORTS</a>
-                <a href="#entertainment" class="hover:text-accent-gold transition duration-200 py-1 md:py-0">ENTERTAINMENT</a>
-                <a href="#fashion" class="hover:text-accent-gold transition duration-200 py-1 md:py-0">FASHION</a>
-                <a href="#comics" class="hover:text-accent-gold transition duration-200 py-1 md:py-0">COMICS</a>
+            <!-- Navigation Links - Use space-x-6 for better spacing on desktop -->
+            <div id="nav-links" class="hidden md:flex flex-col md:flex-row md:space-x-6 space-y-2 md:space-y-0 text-white font-semibold justify-between items-center text-sm md:text-base">
+                <a href="#news" class="hover:text-accent-gold transition duration-200 py-1 md:py-0 nav-link" onclick="showMain()">NEWS</a>
+                <a href="#editorial" class="hover:text-accent-gold transition duration-200 py-1 md:py-0 nav-link" onclick="showMain()">EDITORIAL</a>
+                <a href="#economy" class="hover:text-accent-gold transition duration-200 py-1 md:py-0 nav-link" onclick="showMain()">ECONOMY</a>
+                <a href="#sports" class="hover:text-accent-gold transition duration-200 py-1 md:py-0 nav-link" onclick="showMain()">SPORTS</a>
+                <a href="#entertainment" class="hover:text-accent-gold transition duration-200 py-1 md:py-0 nav-link" onclick="showMain()">ENTERTAINMENT</a>
+                <a href="#fashion" class="hover:text-accent-gold transition duration-200 py-1 md:py-0 nav-link" onclick="showMain()">FASHION</a>
+                <a href="#comics" class="hover:text-accent-gold transition duration-200 py-1 md:py-0 nav-link" onclick="showMain()">COMICS</a>
             </div>
         </div>
     </nav>
 
-    <!-- Main Content Grid -->
-    <main class="max-w-7xl mx-auto px-4 py-10">
+    <!-- Main Content Container (Index View) -->
+    <main id="main-content" class="max-w-7xl mx-auto px-4 py-10 transition-opacity duration-500">
 
         <!-- LATEST NEWS BLOCK: Magazine-Style 3-Column Layout (2/3 Feature + 1/3 Headlines) -->
-        <section id="news" class="mb-12 bg-white p-6 rounded-2xl shadow-xl border-t-8 border-amethyst">
-            <h2 class="text-3xl font-black text-deep-indigo border-b-2 border-accent-gold pb-2 mb-6 uppercase tracking-wider">Top Stories: Philippines</h2>
+        <section id="news" class="mb-12 bg-white dark:bg-dark-bg-card p-6 rounded-2xl shadow-xl dark:shadow-2xl dark:shadow-amethyst/10 border-t-8 border-amethyst transition-colors duration-500">
+            <h2 class="text-3xl font-black text-deep-indigo dark:text-lavender-mist border-b-2 border-accent-gold pb-2 mb-6 uppercase tracking-wider">Top Stories: Philippines</h2>
             
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 
                 <!-- Main Feature Story (2/3 Width) -->
                 <div class="lg:col-span-2 overflow-hidden">
-                    <img class="w-full h-96 object-cover rounded-xl shadow-lg mb-4" 
+                    <!-- FRAMED IMAGE: Added border-4 border-dark-gold -->
+                    <img class="w-full h-96 object-cover rounded-xl shadow-2xl mb-4 border-4 border-dark-gold dark:border-amethyst" 
                          src="https://placehold.co/1000x600/4B0082/FFD700?text=NDRRMC+Typhoon+Uwan+Update" 
                          alt="Rescue workers in a flooded area of the Philippines." 
                          onerror="this.onerror=null;this.src='https://placehold.co/1000x600/4B0082/FFD700?text=Philippine+Typhoon+Crisis';"
                     >
                     <div class="p-2">
                         <span class="text-sm font-bold text-amethyst uppercase tracking-widest mb-2 block">Breaking News</span>
-                        <h3 class="text-4xl font-bold text-gray-900 leading-snug mb-4">
+                        <h3 class="text-4xl font-bold text-gray-900 dark:text-lavender-mist leading-snug mb-4">
                             Uwan Death Toll Reaches 27 as NDRRMC Intensifies Relief Efforts; Calls for Corruption Probe Renewed
                         </h3>
-                        <p class="text-gray-600 mb-4 text-lg">
+                        <p class="text-gray-600 dark:text-dark-text-base mb-4 text-lg">
                             Following the devastating impact of Super Typhoon Uwan, which left 27 confirmed dead, emergency operations are in full swing across Central Luzon and Visayas. The national crisis has reignited public demands for a transparent probe into flood control infrastructure projects.
                         </p>
-                        <a href="#" class="text-royal-purple font-extrabold hover:text-dark-gold transition duration-300">Continue Reading &rarr;</a>
+                        <!-- Updated link to use JS function -->
+                        <a href="javascript:void(0)" data-type="article" data-id="typhoon-uwan" class="read-more-link text-royal-purple dark:text-amethyst font-extrabold hover:text-dark-gold transition duration-300">Continue Reading &rarr;</a>
                     </div>
                 </div>
 
-                <!-- Headline Sidebar (1/3 Width) -->
-                <div class="lg:col-span-1 space-y-6 border-l-2 lg:border-l-4 border-lavender-mist pl-4">
-                    <h4 class="text-xl font-bold text-deep-indigo mb-4">In Focus</h4>
+                <!-- Headline Sidebar (1/3 Width) - Expanded with more headlines -->
+                <div class="lg:col-span-1 space-y-6 border-l-2 lg:border-l-4 border-lavender-mist dark:border-gray-700 pl-4">
+                    <h4 class="text-xl font-bold text-deep-indigo dark:text-lavender-mist mb-4">In Focus</h4>
                     
-                    <!-- Headline 1 -->
-                    <article class="pb-4 border-b border-lavender-mist">
-                        <h5 class="text-lg font-semibold text-gray-800 hover:text-royal-purple cursor-pointer transition duration-200 leading-tight">
-                            AFP Verifies List of Personalities Alleged to be Plotting Coup
-                        </h5>
-                        <p class="text-sm text-gray-500 mt-1">Politics & Governance | 3 hours ago</p>
+                    <!-- Headline 1 (Coup Plot) -->
+                    <article class="pb-4 border-b border-lavender-mist dark:border-gray-700">
+                         <a href="javascript:void(0)" data-type="article" data-id="afp-coup-plot" class="read-more-link block">
+                            <h5 class="text-lg font-semibold text-gray-800 dark:text-dark-text-base hover:text-royal-purple dark:hover:text-amethyst cursor-pointer transition duration-200 leading-tight">
+                                AFP Verifies List of Personalities Alleged to be Plotting Coup
+                            </h5>
+                            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Politics & Governance | 3 hours ago</p>
+                        </a>
                     </article>
 
-                    <!-- Headline 2 -->
-                    <article class="pb-4 border-b border-lavender-mist">
-                        <h5 class="text-lg font-semibold text-gray-800 hover:text-royal-purple cursor-pointer transition duration-200 leading-tight">
-                            Philippines Chosen to Host 2026 UN World Forum on Gastronomy Tourism
-                        </h5>
-                        <p class="text-sm text-gray-500 mt-1">Global Stage | 1 day ago</p>
+                    <!-- Headline 2 (Gastronomy) -->
+                    <article class="pb-4 border-b border-lavender-mist dark:border-gray-700">
+                        <a href="javascript:void(0)" data-type="article" data-id="gastronomy-forum" class="read-more-link block">
+                            <h5 class="text-lg font-semibold text-gray-800 dark:text-dark-text-base hover:text-royal-purple dark:hover:text-amethyst cursor-pointer transition duration-200 leading-tight">
+                                Philippines Chosen to Host 2026 UN World Forum on Gastronomy Tourism
+                            </h5>
+                            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Global Stage | 1 day ago</p>
+                        </a>
                     </article>
 
-                    <!-- Headline 3 -->
-                    <article class="pb-4 border-b border-lavender-mist">
-                        <h5 class="text-lg font-semibold text-gray-800 hover:text-royal-purple cursor-pointer transition duration-200 leading-tight">
+                    <!-- Headline 3 (Anti-Dynasty) -->
+                    <article class="pb-4 border-b border-lavender-mist dark:border-gray-700">
+                        <h5 class="text-lg font-semibold text-gray-800 dark:text-dark-text-base hover:text-royal-purple dark:hover:text-amethyst cursor-pointer transition duration-200 leading-tight">
                             Speaker Dy Vows to Back Anti-Dynasty Bill: 'A Step Towards Equity'
                         </h5>
-                        <p class="text-sm text-gray-500 mt-1">Legislation | 1 day ago</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Legislation | 1 day ago</p>
                     </article>
                     
-                    <!-- Headline 4 -->
-                    <article class="pb-4">
-                        <h5 class="text-lg font-semibold text-gray-800 hover:text-royal-purple cursor-pointer transition duration-200 leading-tight">
+                    <!-- Headline 4 (Bohol Landslide) -->
+                    <article class="pb-4 border-b border-lavender-mist dark:border-gray-700">
+                        <h5 class="text-lg font-semibold text-gray-800 dark:text-dark-text-base hover:text-royal-purple dark:hover:text-amethyst cursor-pointer transition duration-200 leading-tight">
                             Massive Landslide Area in Bohol Town to be Declared Danger Zone
                         </h5>
-                        <p class="text-sm text-gray-500 mt-1">Regional News | 4 hours ago</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Regional News | 4 hours ago</p>
                     </article>
-                </div>
 
+                    <!-- NEW Headline 5 (LGU Success) -->
+                    <article class="pb-4 border-b border-lavender-mist dark:border-gray-700">
+                        <a href="javascript:void(0)" data-type="article" data-id="lgu-success" class="read-more-link block">
+                            <h5 class="text-lg font-semibold text-gray-800 dark:text-dark-text-base hover:text-royal-purple dark:hover:text-amethyst cursor-pointer transition duration-200 leading-tight">
+                                Mayor's 'Zero-Waste' Program Cuts City Garbage by 40% in First Quarter
+                            </h5>
+                            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Local Governance | 2 days ago</p>
+                        </a>
+                    </article>
+
+                    <!-- NEW Headline 6 (OFW Remittances) -->
+                    <article class="pb-4 border-b border-lavender-mist dark:border-gray-700">
+                         <a href="javascript:void(0)" data-type="article" data-id="economic-outlook" class="read-more-link block">
+                            <h5 class="text-lg font-semibold text-gray-800 dark:text-dark-text-base hover:text-royal-purple dark:hover:text-amethyst cursor-pointer transition duration-200 leading-tight">
+                                OFW Remittances Surge, Countering Inflation Headwinds: BSP Report
+                            </h5>
+                            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Finance | 1 hour ago</p>
+                        </a>
+                    </article>
+                    
+                </div>
             </div>
         </section>
 
@@ -149,115 +196,63 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
             
             <!-- EDITORIAL SECTION -->
-            <section id="editorial" class="bg-white p-8 rounded-2xl shadow-xl transition duration-300 hover:scale-[1.01] border-l-8 border-accent-gold">
-                <h2 class="text-2xl font-black text-royal-purple border-b-2 border-amethyst pb-1 mb-4 uppercase">Editorial</h2>
-                <h3 class="text-2xl font-bold text-deep-indigo mb-3 leading-snug">The Unfinished Business of Climate Preparedness</h3>
-                <p class="text-gray-600">
+            <section id="editorial-teaser" class="bg-white dark:bg-dark-bg-card p-8 rounded-2xl shadow-xl dark:shadow-2xl dark:shadow-accent-gold/10 transition duration-300 hover:scale-[1.01] border-l-8 border-accent-gold dark:border-amethyst">
+                <h2 class="text-2xl font-black text-royal-purple dark:text-amethyst border-b-2 border-amethyst dark:border-accent-gold pb-1 mb-4 uppercase">Editorial</h2>
+                <h3 class="text-2xl font-bold text-deep-indigo dark:text-lavender-mist mb-3 leading-snug">The Unfinished Business of Climate Preparedness</h3>
+                <p class="text-gray-600 dark:text-dark-text-base">
                     The back-to-back devastation wrought by Typhoons Tino and Uwan serves as a grim reminder that infrastructure and flood control must be treated as matters of life and death, not political projects. Our nation deserves accountability and resilient systems.
                 </p>
-                <a href="#" class="text-dark-gold font-bold text-sm mt-4 inline-block hover:text-royal-purple transition duration-300">Read the Full Piece &rarr;</a>
+                <!-- Updated link to use JS function -->
+                <a href="javascript:void(0)" data-type="article" data-id="climate-preparedness" class="read-more-link text-dark-gold dark:text-accent-gold font-bold text-sm mt-4 inline-block hover:text-royal-purple dark:hover:text-amethyst transition duration-300">Read the Full Piece &rarr;</a>
             </section>
 
             <!-- SPORTS SECTION -->
-            <section id="sports" class="bg-royal-purple text-white p-8 rounded-2xl shadow-xl transition duration-300 hover:scale-[1.01]">
-                <h2 class="text-2xl font-black text-accent-gold border-b-2 border-white/50 pb-1 mb-4 uppercase">Sports</h2>
+            <section id="sports-teaser" class="bg-royal-purple dark:bg-deep-indigo text-white dark:text-lavender-mist p-8 rounded-2xl shadow-xl transition duration-300 hover:scale-[1.01] border-l-8 border-accent-gold">
+                <h2 class="text-2xl font-black text-accent-gold dark:text-amethyst border-b-2 border-white/50 dark:border-amethyst/50 pb-1 mb-4 uppercase">Sports</h2>
                 <h3 class="text-2xl font-bold mb-3 leading-snug">Batista Fires 41 as Chery Tiggo Survives Capital1 Thriller in PVL</h3>
-                <p class="text-lavender-mist/90">
+                <p class="text-lavender-mist/90 dark:text-dark-text-base/90">
                     Yunieska Batista delivered a conference-high 41 points to lift Chery Tiggo EV over Capital1 in a grueling five-set victory, securing a crucial win to stay alive in the Premier Volleyball League (PVL) quarterfinals race.
                 </p>
-                <a href="#" class="text-accent-gold font-bold text-sm mt-4 inline-block hover:text-dark-gold transition duration-300">View Scores and Analysis &rarr;</a>
+                 <!-- Updated link to use JS function -->
+                <a href="javascript:void(0)" data-type="article" data-id="pvl-thriller" class="read-more-link text-accent-gold dark:text-amethyst font-bold text-sm mt-4 inline-block hover:text-dark-gold dark:hover:text-royal-purple transition duration-300">View Scores and Analysis &rarr;</a>
             </section>
         </div>
         
+        <!-- NEW SECTION: ECONOMY & OPINION/EDUCATION (3-Column layout) -->
+        <div class="mt-10">
+            <h2 class="text-3xl font-black text-deep-indigo dark:text-lavender-mist border-b-4 border-amethyst dark:border-royal-purple pb-2 mb-6 uppercase tracking-wider" id="economy">Deeper Dives</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- ECONOMY FEATURE -->
+                <section class="md:col-span-1 bg-white dark:bg-dark-bg-card p-6 rounded-xl shadow-lg dark:shadow-xl dark:shadow-amethyst/10 border-l-4 border-accent-gold">
+                    <h3 class="text-xl font-bold text-royal-purple dark:text-amethyst mb-3">Startup Ecosystem Hits New Highs</h3>
+                    <p class="text-gray-600 dark:text-dark-text-base text-sm">
+                        Despite global headwinds, the local tech startup sector registered record investments this quarter, driven by fintech and agritech. We break down the key players and what this means for local talent.
+                    </p>
+                    <a href="javascript:void(0)" data-type="article" data-id="startup-ecosystem" class="read-more-link text-dark-gold dark:text-accent-gold font-medium text-xs mt-3 inline-block hover:underline">Read the Report &rarr;</a>
+                </section>
+
+                <!-- OPINION/EDUCATION FEATURE -->
+                <section class="md:col-span-1 bg-white dark:bg-dark-bg-card p-6 rounded-xl shadow-lg dark:shadow-xl dark:shadow-amethyst/10 border-l-4 border-royal-purple">
+                    <h3 class="text-xl font-bold text-royal-purple dark:text-amethyst mb-3">Opinion: Fixing the K-12 Curriculum</h3>
+                    <p class="text-gray-600 dark:text-dark-text-base text-sm">
+                        An education expert argues that while the K-12 system had noble goals, its execution is failing students, particularly in vocational readiness. A call for a nationwide curriculum review.
+                    </p>
+                    <a href="javascript:void(0)" data-type="article" data-id="education-critique" class="read-more-link text-dark-gold dark:text-accent-gold font-medium text-xs mt-3 inline-block hover:underline">Read the Critique &rarr;</a>
+                </section>
+
+                <!-- MORE SPORTS QUICK READ -->
+                <section class="md:col-span-1 bg-royal-purple/10 dark:bg-amethyst/10 p-6 rounded-xl shadow-lg border-l-4 border-amethyst">
+                    <h3 class="text-xl font-bold text-deep-indigo dark:text-lavender-mist mb-3">PBA: Ginebra Dominates</h3>
+                    <p class="text-gray-700 dark:text-dark-text-base text-sm">
+                        Barangay Ginebra takes a commanding 2-0 lead in the Governor's Cup Finals against Meralco, showcasing a defensive masterclass. Can the Bolts force a Game 4?
+                    </p>
+                    <a href="javascript:void(0)" data-type="article" data-id="pba-update" class="read-more-link text-deep-indigo dark:text-accent-gold font-medium text-xs mt-3 inline-block hover:underline">Full Game Summary &rarr;</a>
+                </section>
+            </div>
+        </div>
+
+
         <!-- FEATURE BLOCKS: Entertainment & Fashion (3-Column layout on large screens) -->
         <div class="mt-10">
-            <h2 class="text-3xl font-black text-deep-indigo border-b-4 border-amethyst pb-2 mb-6 uppercase tracking-wider">Features</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-                
-                <!-- ENTERTAINMENT SECTION -->
-                <section id="entertainment" class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-amethyst">
-                    <h3 class="text-xl font-bold text-royal-purple mb-3">Star Power at 'Meet & Bye' Premiere</h3>
-                    <img class="w-full h-40 object-cover rounded-lg shadow-inner mb-3" 
-                         src="https://placehold.co/400x200/9966CC/FFD700?text=Philippine+Movie+Stars" 
-                         alt="Red carpet event for a movie premiere."
-                    >
-                    <p class="text-gray-600 text-sm">
-                        Vice Ganda, Dingdong Dantes, and Marian Rivera graced the red carpet premiere of the holiday blockbuster, setting the stage for a strong opening weekend. Critics are already calling it a must-see.
-                    </p>
-                    <a href="#" class="text-dark-gold font-medium text-xs mt-3 inline-block hover:underline">See Red Carpet Photos &rarr;</a>
-                </section>
-
-                <!-- FASHION SECTION -->
-                <section id="fashion" class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-amethyst">
-                    <h3 class="text-xl font-bold text-royal-purple mb-3">Runway to Relief: Designers Adapt</h3>
-                    <img class="w-full h-40 object-cover rounded-lg shadow-inner mb-3" 
-                         src="https://placehold.co/400x200/4B0082/E6E6FA?text=Sustainable+Fashion" 
-                         alt="Model wearing sustainable Filipino design."
-                    >
-                    <p class="text-gray-600 text-sm">
-                        We spotlight five Filipino fashion houses who are pivoting their production to create sustainable and durable clothing items for disaster relief efforts, blending high fashion with genuine social consciousness.
-                    </p>
-                    <a href="#" class="text-dark-gold font-medium text-xs mt-3 inline-block hover:underline">Explore the Collection &rarr;</a>
-                </section>
-                
-                <!-- Placeholder Ad/Quick Link (for varied layout) -->
-                <div class="md:col-span-2 xl:col-span-1 p-6 bg-accent-gold/20 rounded-xl shadow-lg flex flex-col justify-center items-center text-center border-4 border-accent-gold border-dashed">
-                    <p class="text-xl font-bold text-deep-indigo">SUBSCRIBE TO THE TORCH WEEKLY DIGEST</p>
-                    <p class="text-sm text-gray-700 mt-2">Get the latest news directly in your inbox every morning.</p>
-                    <button class="mt-4 bg-deep-indigo text-accent-gold px-6 py-2 rounded-full font-bold shadow-md hover:bg-royal-purple transition duration-300">Sign Up Now</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- COMICS SECTION: Full Width -->
-        <section id="comics" class="mt-10 bg-deep-indigo p-8 rounded-2xl shadow-xl text-white">
-            <h2 class="text-3xl font-black text-accent-gold border-b-2 border-amethyst pb-2 mb-6 uppercase tracking-wider">COMICS: The Politikid</h2>
-            <div class="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-8">
-                <img class="w-full md:w-1/2 lg:w-2/3 h-auto rounded-lg shadow-inner border-4 border-accent-gold" 
-                     src="https://placehold.co/800x200/FFD700/4B0082?text=Daily+Strip:+The+Drainage+Dilemma" 
-                     alt="Daily Comic Strip Placeholder"
-                >
-                <div class="md:w-1/2 lg:w-1/3 text-center md:text-left">
-                    <h3 class="text-2xl font-bold mb-3">Nov. 12 - "The Drainage Dilemma"</h3>
-                    <p class="text-lavender-mist">
-                        Our favorite satirical cartoonist tackles the perennial problem of Manila's flood control projects in this witty, timely strip. Don't miss the punchline on the last panel!
-                    </p>
-                    <a href="#" class="text-accent-gold font-bold text-sm mt-3 inline-block hover:underline">View All Comics &rarr;</a>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-royal-purple mt-12 py-8">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <p class="text-sm text-white/80">&copy; 2025 The Torch | All Rights Reserved. | Designed with <span class="text-accent-gold font-bold">Amethyst & Gold</span></p>
-            <p class="text-xs text-white/50 mt-2">A Publication Dedicated to Truth and Excellence.</p>
-        </div>
-    </footer>
-
-    <!-- JavaScript for Mobile Menu Toggle -->
-    <script>
-        const menuButton = document.getElementById('menu-button');
-        const navLinks = document.getElementById('nav-links');
-
-        menuButton.addEventListener('click', () => {
-            // Toggles the 'hidden' class on the navigation links
-            navLinks.classList.toggle('hidden');
-            navLinks.classList.toggle('flex');
-            navLinks.classList.toggle('flex-col');
-        });
-
-        // Add event listeners to close the menu when a link is clicked (mobile only)
-        document.querySelectorAll('#nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                if (window.innerWidth < 768) { // md breakpoint in Tailwind is 768px
-                    navLinks.classList.add('hidden');
-                    navLinks.classList.remove('flex', 'flex-col');
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+  
