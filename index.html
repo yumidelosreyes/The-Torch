@@ -234,3 +234,167 @@
             <p class="text-xs text-white/50 dark:text-gray-500 mt-2">A Publication Dedicated to Truth and Excellence.</p>
         </div>
     </footer>
+
+    <!-- JavaScript for Functionality - Part 3A: Setup and Article Data -->
+    <script>
+        // DOM Element Constants (Must be defined first for functions to use them)
+        const menuButton = document.getElementById('menu-button');
+        const navLinks = document.getElementById('nav-links');
+        const mainContent = document.getElementById('main-content');
+        const articleView = document.getElementById('article-view');
+        const archiveView = document.getElementById('archive-view');
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+        
+        // --- DARK MODE LOGIC ---
+        function applyMode(isDark) {
+            if (isDark) {
+                document.documentElement.classList.add('dark');
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+            } else {
+                document.documentElement.classList.remove('dark');
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+            }
+        }
+
+        function toggleDarkMode() {
+            const isDark = document.documentElement.classList.contains('dark');
+            if (isDark) {
+                localStorage.setItem('theme', 'light');
+                applyMode(false);
+            } else {
+                localStorage.setItem('theme', 'dark');
+                applyMode(true);
+            }
+        }
+        
+        // --- MOCK ARTICLE CONTENT DATA (PART 1 OF DATA) ---
+        const articles = {
+            'typhoon-uwan': {
+                title: "Uwan Death Toll Reaches 27 as NDRRMC Intensifies Relief Efforts; Calls for Corruption Probe Renewed",
+                category: "Breaking News",
+                image: "https://placehold.co/1200x600/4B0082/FFD700?text=NDRRMC+Typhoon+Uwan+Update",
+                author: "By Maria Santos",
+                date: "November 12, 2025",
+                content: [
+                    "MANILA — The National Disaster Risk Reduction and Management Council (NDRRMC) confirmed late Tuesday that the death toll from Super Typhoon Uwan has tragically climbed to 27, with search and rescue operations continuing in severely affected regions of Central Luzon and the Visayas.",
+                    "Relief efforts, hampered by damaged infrastructure and widespread flooding, are being prioritized, focusing on delivering food, water, and medical supplies to isolated communities. The government has pledged swift action, deploying military transport assets and opening evacuation centers.",
+                    "However, the immediate crisis has also served as a flashpoint for political scrutiny. Citizen groups and opposition lawmakers are renewing long-standing calls for a rigorous and transparent investigation into the allocation of funds for major flood control projects over the past decade, suggesting inadequate spending contributed to the disaster's severity.",
+                    "Presidential spokesperson Avelino Diaz assured the public that accountability remains paramount, stating, 'We mourn the loss of our countrymen, and we guarantee that any failure in infrastructure, whether due to mismanagement or corruption, will be addressed with the full force of the law.' The recovery process is expected to take months, with damages currently estimated in the billions of pesos."
+                ]
+            },
+            'climate-preparedness': {
+                title: "The Unfinished Business of Climate Preparedness: Why Our Infrastructure Fails",
+                category: "Editorial",
+                image: "https://placehold.co/1200x600/9966CC/2E0854?text=Editorial+on+Climate+Action",
+                author: "By The Editorial Board",
+                date: "November 12, 2025",
+                content: [
+                    "The Philippines, an archipelago battered annually by typhoons, must move beyond reactive disaster response and embrace proactive, climate-resilient development. The recent back-to-back typhoons, Tino and Uwan, expose a critical failure: our systems are still designed for the weather of the past, not the climate reality of the future.",
+                    "It is no longer enough to clear blocked drains; we must redesign our urban sprawl, fortify coastal defenses, and implement strict environmental controls to protect our natural buffers like mangroves and forests. This requires a political will that transcends short electoral cycles.",
+                    "The Torch calls upon Congress to immediately elevate climate change mitigation and adaptation as the highest national security priority. Our nation's prosperity and, more fundamentally, the lives of our citizens, depend on treating preparedness not as an expense, but as a foundational investment."
+                ]
+            },
+            'pvl-thriller': {
+                title: "Batista Fires 41 as Chery Tiggo Survives Capital1 Thriller in PVL Quarterfinals",
+                category: "Sports",
+                image: "https://placehold.co/1200x600/FFD700/4B0082?text=PVL+Volleyball+Action",
+                author: "By Enrico Cruz",
+                date: "November 11, 2025",
+                content: [
+                    "PASIG CITY — Yunieska Batista etched her name in the history books, dropping a conference-high 41 points to power the Chery Tiggo EV over a tenacious Capital1 side in a five-set marathon (25-23, 23-25, 25-19, 21-25, 17-15) last night at the PhilSports Arena.",
+                    "The Cuban import was virtually unstoppable, tallying 38 kills and three blocks, leading her team through a grueling final set that saw the lead change hands five times. The victory keeps Chery Tiggo's playoff aspirations alive, placing them third in the pool with one game remaining.",
+                    "Capital1's spirited defense, spearheaded by libero Jen Reyes, kept them in the game, forcing key errors in sets two and four. However, their offense faltered at the net when it mattered most, allowing Batista the breathing room she needed to deliver the final match point with a powerful cross-court spike."
+                ]
+            },
+            'afp-coup-plot': {
+                title: "AFP Confirms Investigation into Alleged Coup Plotters List",
+                category: "Politics & Governance",
+                image: "https://placehold.co/1200x600/2E0854/FFD700?text=AFP+Investigation",
+                author: "By Patricia Reyes",
+                date: "November 12, 2025",
+                content: [
+                    "QUEZON CITY — The Armed Forces of the Philippines (AFP) confirmed today that it is conducting a detailed investigation into a leaked document containing a list of political and military personalities allegedly involved in a plot to destabilize the current administration.",
+                    "AFP Chief of Staff General Miguel Ramos stated that while the report is being treated with seriousness, there is no immediate threat to national security or the chain of command. 'We are in control of the situation, and the vast majority of our forces remain loyal to the Constitution,' General Ramos said in a televised address.",
+                    "The investigation is focused on verifying the authenticity of the list and the motives behind its dissemination. Analysts suggest the leak may be an attempt to sow discord during the ongoing typhoon recovery efforts."
+                ]
+            },
+            'gastronomy-forum': {
+                title: "Philippines Prepares to Host 2026 UN World Forum on Gastronomy Tourism",
+                category: "Global Stage",
+                image: "https://placehold.co/1200x600/4B0082/E6E6FA?text=Filipino+Cuisine+Placeholder",
+                author: "By Lito Fernandez",
+                date: "November 11, 2025",
+                content: [
+                    "MAKATI — The Department of Tourism (DOT) announced today that the Philippines has been officially selected to host the prestigious 2026 UN World Forum on Gastronomy Tourism. This pivotal event aims to showcase the nation's rich culinary heritage on a global scale.",
+                    "DOT Secretary Jaime Lim highlighted the selection as a major victory for Filipino culture and tourism. 'Our selection proves that Filipino food—from adobo to sinigang—is finally getting the global recognition it deserves. We are ready to welcome the world's top chefs, critics, and travel experts.'",
+                    "Preparations are already underway to ensure the event highlights sustainable and regional food practices, focusing on provinces known for unique delicacies, such as Pampanga, Iloilo, and Cebu."
+                ]
+            },
+            'lgu-success': {
+                title: "Mayor's 'Zero-Waste' Program Cuts City Garbage by 40% in First Quarter",
+                category: "Local Governance",
+                image: "https://placehold.co/1200x600/9966CC/2E0854?text=Waste+Management+Success",
+                author: "By Jenny Ramos",
+                date: "November 10, 2025",
+                content: [
+                    "MANDALUYONG CITY — Mayor Clara David's ambitious 'Zero-Waste by 2030' program has yielded impressive initial results, reporting a 40% reduction in city garbage collected during its pilot quarter. The initiative focuses heavily on strict segregation, composting, and community-led recycling drives.",
+                    "Key to the program’s success is the implementation of decentralized Material Recovery Facilities (MRFs) in every barangay, turning neighborhood waste into reusable materials and compost. Local officials attribute the high compliance rate to intensive public information campaigns and clear incentives for participating communities.",
+                    "Environmentalists are hailing the program as a potential national model, demonstrating that effective waste management can be achieved through disciplined local execution and strong political leadership."
+                ]
+            },
+            'economic-outlook': {
+                title: "OFW Remittances Surge, Countering Inflation Headwinds: BSP Report",
+                category: "Finance",
+                image: "https://placehold.co/1200x600/FFD700/4B0082?text=OFW+Remittances+and+Peso",
+                author: "By Roberto Manalo",
+                date: "November 12, 2025",
+                content: [
+                    "MANILA — The Bangko Sentral ng Pilipinas (BSP) reported a significant year-on-year increase in overseas Filipino worker (OFW) remittances for the third quarter, providing a crucial buffer against stubborn domestic inflation.",
+                    "The influx of foreign currency has helped stabilize the Philippine Peso, mitigating the impact of rising global commodity prices. BSP Governor Felipe Abueva noted, 'Our resilient OFWs continue to be the unsung heroes of the Philippine economy. Their contributions are vital not just for family welfare but for overall macroeconomic stability.'",
+                    "Despite this positive inflow, analysts caution that sustained domestic efforts are required to tame food and fuel price hikes, which continue to disproportionately affect low-income households."
+                ]
+            },
+            'startup-ecosystem': {
+                title: "Fintech and Agritech Drive Philippine Startup Ecosystem to Record Investments",
+                category: "Business",
+                image: "https://placehold.co/1200x600/2E0854/FFD700?text=Startup+Investment+Chart",
+                author: "By Ana Reyes",
+                date: "November 11, 2025",
+                content: [
+                    "PASIG — The Philippine startup ecosystem successfully weathered a cooling global market, recording its highest-ever quarterly investment volume, primarily fueled by massive growth in financial technology (Fintech) and agricultural technology (Agritech).",
+                    "The surge reflects investor confidence in digitalizing the massive unbanked population and modernizing the country's agricultural sector. Fintech companies specializing in digital lending and e-wallets attracted the bulk of the capital, followed closely by platforms streamlining farm-to-market logistics.",
+                    "Industry leaders predict sustained growth, contingent on continued regulatory support and increased development of specialized local tech talent."
+                ]
+            },
+            'education-critique': {
+                title: "Opinion: A Nation At Risk—The Urgent Need to Reform K-12 Vocational Tracks",
+                category: "Education",
+                image: "https://placehold.co/1200x600/4B0082/E6E6FA?text=K-12+Education+Reform",
+                author: "By Dr. Elena Garcia, Education Analyst",
+                date: "November 10, 2025",
+                content: [
+                    "The K-12 program promised to deliver job-ready graduates, but after a decade, the vocational tracks remain critically underfunded and poorly standardized. Dr. Garcia argues that many high school graduates lack the practical skills and nationally recognized certifications needed to enter specialized industries.",
+                    "The primary challenge lies in the disparity between school facilities. A small percentage of urban schools possess modern laboratories and equipment, while the vast majority rely on outdated resources, crippling the quality of technical-vocational education (TVET).",
+                    "Dr. Garcia proposes a mandatory Public-Private Partnership model where industry leaders are required to provide internships, equipment, and curriculum guidance to designated TVET high schools, ensuring alignment with current industry demands."
+                ]
+            },
+            'pba-update': {
+                title: "PBA Finals: Ginebra Dominates Meralco in Game 2 with Defensive Masterclass",
+                category: "Sports",
+                image: "https://placehold.co/1200x600/9966CC/FFD700?text=PBA+Ginebra+vs+Meralco",
+                author: "By Rico Velez",
+                date: "November 12, 2025",
+                content: [
+                    "MANILA — Barangay Ginebra San Miguel took a commanding 2-0 lead in the PBA Governor's Cup Finals after defeating the Meralco Bolts, 98-85, last night. The victory was defined by a suffocating defensive performance in the second half, holding the Bolts to just 35 points.",
+                    "Import Justin Brownlee led the charge with 34 points and 12 rebounds, but it was the effort of Scottie Thompson, who notched a triple-double (10 points, 11 rebounds, 10 assists), that truly energized the crowd and stifled Meralco's perimeter game.",
+                    "Meralco coach Norman Black acknowledged the superior defense but vowed his team would bounce back in Game 3, 'We missed too many open looks, but the series isn't over. We need to find a way to break their zone and match their energy.'"
+                ]
+            }
+        };
+
+        // The remaining code (archives data, navigation functions, and event listeners) continues in Part 3B.
+        // DO NOT CLOSE THE SCRIPT TAG YET!
