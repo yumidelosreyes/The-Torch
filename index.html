@@ -398,3 +398,201 @@
 
         // The remaining code (archives data, navigation functions, and event listeners) continues in Part 3B.
         // DO NOT CLOSE THE SCRIPT TAG YET!
+// --- MOCK ARCHIVE CONTENT DATA (PART 2 OF DATA) ---
+        const archives = {
+            'entertainment': {
+                title: "Entertainment Archive: Star Power and Red Carpets",
+                items: [
+                    { headline: "Gabi ng Bituin: 10 Best Looks from the Star Awards", date: "Nov 10, 2025", img: "https://placehold.co/400x250/9966CC/FFD700?text=Star+Looks" },
+                    { headline: "The Rise of Regional Cinema: Indie Hits from Mindanao", date: "Nov 8, 2025", img: "https://placehold.co/400x250/4B0082/E6E6FA?text=Mindanao+Film" },
+                    { headline: "Behind the Scenes: The Making of 'Meet & Bye'", date: "Nov 5, 2025", img: "https://placehold.co/400x250/FFD700/4B0082?text=Movie+Set" },
+                    { headline: "A Decade of Vice Ganda: Comedy Queen's Best Moments", date: "Nov 2, 2025", img: "https://placehold.co/400x250/9966CC/2E0854?text=Comedy+Icon" },
+                    { headline: "New Music Friday: Sarah G's Album Drop Review", date: "Oct 28, 2025", img: "https://placehold.co/400x250/2E0854/FFD700?text=Music+Review" },
+                    { headline: "Teleserye Face-Off: The Biggest Battles on Primetime TV", date: "Oct 25, 2025", img: "https://placehold.co/400x250/4B0082/FFD700?text=Teleserye+Drama" },
+                ]
+            },
+            'fashion': {
+                title: "Fashion Archive: Sustainable Styles and Designer Features",
+                items: [
+                    { headline: "Rattan Rhapsody: The Woven Revolution in Local Accessories", date: "Nov 9, 2025", img: "https://placehold.co/400x250/4B0082/FFD700?text=Rattan+Bags" },
+                    { headline: "A Look at the Terno: Traditional Wear Reimagined", date: "Nov 7, 2025", img: "https://placehold.co/400x250/9966CC/E6E6FA?text=Modern+Terno" },
+                    { headline: "Five Designers Leading the Zero-Waste Movement", date: "Nov 4, 2025", img: "https://placehold.co/400x250/FFD700/4B0082?text=Zero+Waste+Fashion" },
+                    { headline: "Street Style Spotlight: UP Diliman Campus", date: "Nov 1, 2025", img: "https://placehold.co/400x250/2E0854/FFD700?text=Street+Fashion" },
+                    { headline: "Bridal Couture Trends: Simple Elegance for 2026", date: "Oct 29, 2025", img: "https://placehold.co/400x250/9966CC/2E0854?text=Bridal+Wear" },
+                    { headline: "The Comeback of the Barong Tagalog in Casual Wear", date: "Oct 26, 2025", img: "https://placehold.co/400x250/4B0082/FFD700?text=Barong+Style" },
+                ]
+            },
+            'comics': {
+                title: "Comics Archive: The Best of The Politikid",
+                items: [
+                    { headline: "The Politikid: Nov 11 - The Lapsed Promise", date: "Nov 11, 2025", img: "https://placehold.co/400x250/FFD700/4B0082?text=Strip+11" },
+                    { headline: "The Politikid: Nov 10 - Budgetary Blackhole", date: "Nov 10, 2025", img: "https://placehold.co/400x250/9966CC/FFD700?text=Strip+10" },
+                    { headline: "The Politikid: Nov 9 - The Social Media Tax", date: "Nov 9, 2025", img: "https://placehold.co/400x250/4B0082/E6E6FA?text=Strip+09" },
+                    { headline: "The Politikid: Nov 8 - Traffic and the Trains", date: "Nov 8, 2025", img: "https://placehold.co/400x250/2E0854/FFD700?text=Strip+08" },
+                    { headline: "The Politikid: Nov 7 - The Crypto Craze", date: "Nov 7, 2025", img: "https://placehold.co/400x250/9966CC/2E0854?text=Strip+07" },
+                    { headline: "The Politikid: Nov 6 - Foreign Policy Foozles", date: "Nov 6, 2025", img: "https://placehold.co/400x250/FFD700/4B0082?text=Strip+06" },
+                ]
+            }
+        };
+
+
+        // --- CORE NAVIGATION FUNCTIONS ---
+
+        /**
+         * Shows the main news index and hides all other views.
+         */
+        function showMain() {
+            mainContent.classList.remove('hidden');
+            articleView.classList.add('hidden');
+            archiveView.classList.add('hidden');
+            window.scrollTo(0, 0); // Scroll to top
+        }
+        
+        /**
+         * Switches the view to the article display and populates it.
+         * @param {string} articleId - The key for the article in the 'articles' object.
+         */
+        function showArticle(articleId) {
+            const articleData = articles[articleId];
+            if (!articleData) {
+                console.error("Article not found:", articleId);
+                showMain(); // Fallback
+                return;
+            }
+
+            // Populate the article view
+            document.getElementById('article-title').textContent = articleData.title;
+            document.getElementById('article-category').textContent = articleData.category;
+            document.getElementById('article-author').textContent = articleData.author;
+            document.getElementById('article-date').textContent = articleData.date;
+            
+            const imageEl = document.getElementById('article-image');
+            imageEl.src = articleData.image;
+            imageEl.alt = articleData.title + " image";
+            
+            // Fallback for missing image load
+            imageEl.onerror = function() {
+                this.onerror=null;
+                this.src='https://placehold.co/1200x600/CCCCCC/666666?text=Image+Not+Available';
+            };
+
+
+            const contentContainer = document.getElementById('article-content');
+            contentContainer.innerHTML = ''; // Clear existing content
+            
+            articleData.content.forEach(paragraphText => {
+                const p = document.createElement('p');
+                p.textContent = paragraphText;
+                contentContainer.appendChild(p);
+            });
+
+            // Switch visibility
+            mainContent.classList.add('hidden');
+            archiveView.classList.add('hidden');
+            articleView.classList.remove('hidden');
+            window.scrollTo(0, 0); 
+        }
+
+        /**
+         * Switches the view to the archive list and populates it.
+         * @param {string} archiveId - The key for the archive in the 'archives' object (e.g., 'fashion').
+         */
+        function showArchive(archiveId) {
+            const archiveData = archives[archiveId];
+            if (!archiveData) {
+                console.error("Archive not found:", archiveId);
+                showMain(); // Fallback
+                return;
+            }
+            
+            // Populate the archive view
+            document.getElementById('archive-title').textContent = archiveData.title;
+            const contentContainer = document.getElementById('archive-content');
+            contentContainer.innerHTML = ''; // Clear existing content
+
+            // Create cards for each item in the archive
+            archiveData.items.forEach(item => {
+                // Archive card styling adapted for dark mode
+                const card = `
+                    <div class="bg-white dark:bg-dark-bg-card p-4 rounded-xl shadow-lg border-l-4 border-amethyst dark:border-royal-purple hover:shadow-xl transition duration-300 border-2 border-lavender-mist dark:border-gray-700">
+                        <img class="w-full h-48 object-cover rounded-lg mb-3 border-2 border-amethyst dark:border-accent-gold shadow-md" 
+                            src="${item.img}" 
+                            alt="${item.headline}"
+                            onerror="this.onerror=null;this.src='https://placehold.co/400x250/CCCCCC/666666?text=Archive+Image';"
+                        >
+                        <h3 class="text-xl font-bold text-royal-purple dark:text-amethyst mb-2 leading-snug">${item.headline}</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">${item.date}</p>
+                        <!-- Note: Archive links typically go to individual articles, but here they link back to a mock article/main page -->
+                        <a href="javascript:void(0)" class="text-deep-indigo dark:text-accent-gold font-semibold text-xs mt-3 inline-block hover:underline" onclick="showMain()">View Article &rarr;</a>
+                    </div>
+                `;
+                contentContainer.innerHTML += card;
+            });
+
+            // Switch visibility
+            mainContent.classList.add('hidden');
+            articleView.classList.add('hidden');
+            archiveView.classList.remove('hidden');
+            window.scrollTo(0, 0); 
+        }
+        
+        // --- EVENT LISTENERS ---
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check for saved preference or system preference on load
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+                applyMode(true);
+            } else {
+                applyMode(false);
+            }
+
+            // 1. Mobile Menu Toggle
+            menuButton.addEventListener('click', () => {
+                navLinks.classList.toggle('hidden');
+                // Ensure proper display type when visible
+                if (!navLinks.classList.contains('hidden')) {
+                    navLinks.classList.add('flex', 'flex-col');
+                    navLinks.classList.remove('hidden');
+                } else {
+                    navLinks.classList.remove('flex', 'flex-col');
+                }
+            });
+
+
+            // Close menu on link click (mobile only)
+            document.querySelectorAll('#nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth < 768) { // md breakpoint in Tailwind is 768px
+                        navLinks.classList.add('hidden');
+                        navLinks.classList.remove('flex', 'flex-col');
+                    }
+                });
+            });
+
+            // 2. Dark Mode Toggle Click
+            darkModeToggle.addEventListener('click', toggleDarkMode);
+
+
+            // 3. Dynamic Content Links (Article and Archive)
+            document.querySelectorAll('.read-more-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const type = link.getAttribute('data-type');
+                    const id = link.getAttribute('data-id');
+                    
+                    if (type === 'article' && id) {
+                        showArticle(id);
+                    } else if (type === 'archive' && id) {
+                        showArchive(id);
+                    }
+                });
+            });
+            
+            // 4. Back Buttons are already linked via inline onClick="showMain()"
+        });
+    </script>
+</body>
+</html>
